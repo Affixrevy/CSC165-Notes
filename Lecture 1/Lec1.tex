@@ -1,0 +1,109 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} ({\small \it \today})}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+\newcommand{\bbox}[1]{
+    \noindent\fbox{%
+        \parbox{\textwidth}{%
+            #1
+        }%
+    }
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 1}{Arthur Gao}{}{}{}
+
+What is a set?
+
+\boxed{\text{A set is a collection of "elements", "numbers", "items"}}
+
+\begin{itemize}
+	\item Must be distinct elements (no repeats)
+	\item Example would be $\{3, 1, 2, 3\} = \{2, 1, 3\} = \{1, 2, 3\}$
+	\item $\{ \dots \}$ is a notation used to REFER to a set
+\end{itemize}
+
+Take the set $\{3, 1, 2, 3\}$ we can denote the "size" or "cardinality" as
+$$|\{3, 1, 2, 3\}| = |\{1, 2, 3\}| = 3$$
+Suppose $x, y \in \R$ then $1 \le |\{x, y, x+y\}| \le 3$ since $x, y$ are not necessarily unique values.
+Therefore, if $x = 0, y = 0$ then size of the set is 1. If $x = 0, y = 1$ then size is 2, and if $x = 1, y = 2$, size is 3.
+\\
+\\
+EXAMPLES:
+\begin{align*}
+	|\{2, 3, 1\}| &= 3\\
+	|\{\}| = |\emptyset| &= 0\\
+	|\{\R\}| &= \infty\\
+	|\{165, \text{dog}, \text{:)}\}| &= 3\\
+	|\{\{2, 3, 1\}, \text{dog}, \text{:)}, 165\}| &= 4\\
+	|\{\emptyset\}| &= 1\\
+\end{align*}
+Note that size of a finite set is always a natural number so $|s| \in \N$)
+\\
+\\
+We use the notation $e \in S:$ to say $e$ is an ELEMENT of $S$
+\\
+\\
+EXAMPLES:
+\begin{align*}
+	A &= \{\{a, b\}, c, \{d, e, f\}\}\\
+	\{a, b\} &\in A\\
+	c &\in A
+\end{align*}
+\\
+\\
+We use the notation $B \subseteq C:$ to say $B$ is an SUBSET of $C$ $e \in B$ then $e \in C$ where $B, C$ can be equal.
+\\
+We use the notation $B \subset C:$ to say $B$ is an SUBSET of $C$ $e \in B$ then $e \in C$ where $B, C$ cannot be equal.
+\\
+\\
+EXAMPLES:
+\begin{align*}
+	A = \{a, b, c\}\\
+	\emptyset \subset A\\
+	\{a\}\\
+	\{b\}\\\{c\}\\\{ab\}\\\{ac\}\\\{bc\}\\\{a, b, c\}
+\end{align*}
+Note: For every set $S$, $\emptyset \subseteq S$ and therefore $\emptyset \subseteq \emptyset$
+
+\end{document}

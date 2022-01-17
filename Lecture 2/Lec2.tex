@@ -1,0 +1,119 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} ({\small \it \today})}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+\newcommand{\bbox}[1]{
+    \noindent\fbox{%
+        \parbox{\textwidth}{%
+            #1
+        }%
+    }
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 2}{Arthur Gao}{}{}{}
+
+Note: Problem Set 0 Available
+
+\section{Functions:}
+\boxed{f: A \to B \text{ means } f \text{ is a function from set } A \text{ to set } B}
+\\
+This means for each element of a ($a \in A)$ there's a corresponding $f(a) \in B$
+\\
+In the above definition, $A$ is the \textbf{domain} where $B$ is the \textbf{codomain} so we \textbf{MAP} elements from the domain to the codomain
+\\
+Example:\\
+Take the sets:
+\begin{align*}
+	A = \{0, 2, 4\}\\
+	B = \{1, 2, 3\}\\
+\end{align*}
+Define $f: A \to B$ by $f(x) = \frac{x}{2} + 1$ \\ \\
+Some notes about Functions:
+\begin{itemize}
+	\item You cannot have one value in $A$ corresponding to multiple values of $B$
+	\item You CAN have multiple values in $A$ corresponding to a single value of $B$
+	\item We also say that $f(x)$ is called the image of $x$
+	\begin{itemize}
+		\item $f(x) \in B$. It is \textbf{NOT} the function since we do not know what $x$ is. 
+		\item We must distinguish between the function $f$ and the element of $B$, $f(x)$
+	\end{itemize}
+	\item Say we define $f$ by $ f(x) = \frac{x^2-3x}{x-3}$ \dots well for what $f$
+	\begin{itemize}
+		\item We must define a domain
+		\item Possible example could be $f: \R - {3} \to \R$
+		\item Another option is "Define $f: \R \to \R \text{ by } g(x)$" which means "for each $x \in \R$, let $g(x) = x$"
+		\item We must be clear about "what $x$" when we define functions
+	\end{itemize}
+\end{itemize}
+
+\section{Predicates:}
+Given: $P: A \to \{\text{True, False}\}$ so P maps to the set of boolean values\\
+Example:\\
+Define: $P: \R \to \{\text{T, F}\}$ by $P(x) : x > 165$
+With this we can say the set of values in the domain where $P(x) = T$ which is:
+$$\{x \in \R : P(x) = T\}$$
+So we're interested in the "Set in the predicate where the given condition is true"
+\\
+\\
+\section{Notation:}
+$\sum$ is for adding up numbers where there is a sequential pattern.\\
+Take: $$4 + \frac{9}{2} + \frac{16}{3} + \dots + \frac{164^2}{164}$$ 
+which can be notated as $$\sum_{i = 1}^{164} \frac{(n + 1)^2}{n}$$ or $$\sum_{i = 2}^{165} \frac{n^2}{n - 1}$$
+\textit{Note: A method for breaking down the above summation is puting it in a uniform form so rewrite it as:} \\
+$$\frac{2^2}{1} + \frac{3^2}{2} + \frac{4^2}{3} + \dots + \frac{165^2}{164}$$
+There is a convention that if we take a sum from on value to a value that is one fewer than the originating value, the sum is 0.\\
+Example:
+$$\sum_{i = 165}^{164} \frac{i}{i-1} = 0$$
+
+Similarily, $\Pi$ is $f(a) * f(a + 1) * \dots * f(b)$ so:
+
+\section{Propositional Logic}
+\boxed{\text{A proposition is a statement that is true ... or it's false}} \\ \\
+$x < 165$ is \textbf{not} a proposition since it is dependent on $x$\\
+Some Propositional statements could be:
+\begin{itemize}
+	\item (valid) It's sunny in Los Angeles right now
+	\item (valid) There is life on Europa
+	\item (invalid) She likes cauliflower - well who is "she"?
+\end{itemize}
+\end{document}
