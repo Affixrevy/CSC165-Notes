@@ -1,0 +1,115 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{csc}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 5}{Arthur Gao}{}{}{}
+
+\section{Proofs}
+What is a proof:\\
+\bbox{In CSC165, we consider proofs as a "convincing argument"}
+A proof is
+\begin{itemize}
+	\item Relative to an audience. Audiences can include:
+	\begin{itemize}
+		\item Yourself (checking yourself - convince yourself)
+		\item Peers
+	\end{itemize}
+	\item A way to save someone time by the level of detail and organization of the exploration
+\end{itemize}
+
+When writing a proof, you must remember \strong{why}. It is a structured presentation, often in a different
+order than the initial exploration of the material.
+\\
+\\
+\subsection{Some general forms}
+The Direct Proof of an existential.
+\begin{proof}
+	Prove: $\exists x \in D, P(x)$\\
+	The \strong{Structure} often follows:\\
+	Let $x_0 = $ \\
+	Check / show / prove\\
+	\dots \\
+	Show that $x_0 \in D$ (for the chosen $x_0$)\\
+	Check/ show / prove (again)\\
+	Show that $P(0)$
+\end{proof}
+\\
+The Direct proof of universal:
+\begin{proof}
+	Prove: $\forall x \in D, P(x)$\\
+	The \strong{Structure} often follows:\\
+	Let $x \in D$ - Think in terms of individual values that doesn't' depend on which particular value is chosen.
+	\\
+	Then prove $P(x)$
+\end{proof}
+\\
+\\
+Notice that for the existential, we introduce an individual value and write a proof \strong{for that value.}
+\\
+\newpage
+To prove:
+\begin{itemize}
+	\item $\exists x \in D, P(x)$: We choose the $x$
+	\item $\forall x \in D, P(x)$: Someone else chooses $x \in D$. Our proof must work without knowing which $x$.
+\end{itemize}
+
+\subsection{Further Exploration}
+"Particular" vs "Arbitrary"\\
+Explore "Prove $P \implies Q$\\
+\begin{proof}
+	Structure follows:\\
+	Assume: $P$ is \True\\
+	Show that 
+\end{proof}
+\subsection{Sample Proofs}
+Prove that if a natural number is larger than $20$ then its square minus $165$ is at least four\\
+\hspace*{10mm} First, we make this statement precise $\forall n \in \N, n > 20 \implies n^2 - 165 \ge 4$\\
+\hspace*{10mm} Second, We do some rough work\dots\\
+Try a goal:
+\begin{align*}
+	n^2 - 165 &\ge 4\\
+	n^2 &\ge 169\\
+	n &\ge 13
+\end{align*}
+We might have found an "equivalent condition" above.\\
+Once we have completed the rough work, we can begin with the formal proof.\\
+\begin{proof}
+	Let $n \in \N$.\\
+	Suppose $n > 20$\\
+	Then, $n \ge 13$, so $n^2 \ge 169$\\
+	Hence $n^2 - 165 \ge169-165$\\
+	Thus $n^2 - 165 \ge 4$
+\end{proof}
+\\
+Another way to prove the same thing\\
+\begin{proof}
+	Let $n \in \N$\\
+	Assume $n > 20$\\
+	Then: 
+	\begin{align*}
+		n^2 - 165 &> 400 - 165\\
+		n^2 - 165 &> 235\\
+		n^2 - 165 &\ge 4
+	\end{align*}
+\end{proof}
+
+\end {document}

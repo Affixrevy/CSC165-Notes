@@ -1,0 +1,157 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} ({\small \it \today})}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+\newcommand{\bbox}[1]{
+    \noindent\fbox{%
+        \parbox{\textwidth}{%
+            #1
+        }%
+    }
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 3}{Arthur Gao}{}{}{}
+
+\section{Propositional Logic}
+Consider the following statements
+\begin{itemize}
+	\item "It's snowing" (here and now)
+	\item "I'm wearing a hat"
+\end{itemize}
+\textit{These statements can either be true or false}\\
+Given this, we can use \textbf{Implications} so:\\
+\bbox{If it's snowing, then I'm wearing a hat - $S \implies H$. This is also a proposition}
+It is important to note that the implication is solely dependent on $S$\\
+\\
+The truth table for implications is:
+\begin{center}
+	\begin{tabular}{c c c}
+		\hline
+		$S$ &$H$ &$S \implies H$\\
+		\hline
+		F &F &T\\
+		F &T &T\\
+		T &F &F\\
+		T &T &T
+	\end{tabular}
+\end{center}
+In the cases for when $S$ is false, these are when the implication is \textbf{vacuously true}.\\
+\\
+\subsection{Contrapositive}
+We then consider the case with $S \implies H$ when $\lnot H$
+\indent if $S$ were true then $H$ would be but $\lnot H$ so it can't be true. Therefore:
+$$
+S \implies H \equiv \lnot H \implies \lnot S
+$$
+This is the contrapositive. We can examine this in the truth table
+\begin{center}
+	\begin{tabular}{c c c}
+		\hline
+		$S$ &$H$ &$\lnot H \implies \lnot S$\\
+		\hline
+		T &T &T\\
+		F &T &T\\
+		T &F &F\\
+		F &F &T
+	\end{tabular}
+\end{center}
+\subsection{Converse}
+Examine the case when $H \implies S$
+\begin{center}
+	\begin{tabular}{c c c}
+		\hline
+		$S$ &$H$ &$ H \implies S$\\
+		\hline
+		F &F &T\\
+		F &T &F\\
+		T &F &T\\
+		T &T &T
+	\end{tabular}
+\end{center}
+As the truth table above shows, the converse of the statement is not the same. Therefore,
+we must be diligent in the usage of "if" in conditions.
+\\
+\\
+However if we want both implications to be true then we can make them dependent on each other
+$$
+S \implies H \land H \implies S \equiv S \Leftrightarrow H
+$$
+\section{Predicates}
+\bbox{Recall: a predicate is a function with codomain \{T, F\}}
+Define: $P: Times$
+by $P(t)$ is "it's snowing at time $t$"
+We can quantify:\\
+Let $T = Times$\\
+$\forall x \in T, P(x)$
+means: "For each/all/every/any time $x$, it's snowing at time $x$. which is quite verbose. That statement is equivalent to "It's always snowing" 
+This can be interpreted as in a set of all times $T = \{t_1, t_2, t_3\dots\}$ then P($t_1$) $\land$ P($t_2$) $\land$ P($t_3$) $\land \dots$
+\\
+\\
+We can also use existential statements where: $\exists x \in T, P(x)$ which means "There is/exists a time $x$ such that it's snowing at time $x$"
+which can be shortened to "It snows some time at least once" so given the above set $T$, P($t_1$) $\lor$ P($t_2$) $\lor$ P($t_3$) $\lor \dots$
+\subsection{Binary Predicate}
+Let $D$ be the set of string over alphabet \{a, b, c\} \\
+\hspace*{10mm} Note that in CS theory, ""(double quote) is omitted when referring to strings so $\epsilon$ is used to refer to the empty string.
+Therefore, the set $D = $
+Define $P : D \times D \to \{T, F\}$ by\\
+\indent $P(x, y): x$ and $y$ have the same first character.\\
+We can consider the case where $P(\epsilon, \epsilon)$, we realize that this predicate actually has two interpretations:
+\begin{itemize}
+	\item $\land: x, y$ have first characters and they are the same.
+	\item $\implies:$ if $x, y$ have first characters they are the same. 
+\end{itemize}
+\subsection{Examining Quantifiers}
+\begin{itemize}
+	\item $\exists x \in D, \exists y \in D, P(x, y)$: True (since we can pick any value - even the same)
+	\item $\forall x \in D, \forall y \in D, P(x, y)$: False (since we can come up with counterexamples eg. x = baa, y = cab)
+	\item $\forall x \in D, \exists y \in D, P(x, y)$: Depends on the empty string interpretation
+	\begin{itemize}
+		\item And interpretation: False since the predicate is false for any empty string
+		\item Implication interpretation: True since the empty string case is vacuously true.
+	\end{itemize}
+	\item $\exists x \in D, \forall y \in D, P(x, y)$: This is essentially the same as above and has interpretations.
+\end{itemize}
+
+
+\end {document}

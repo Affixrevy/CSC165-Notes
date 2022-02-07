@@ -1,0 +1,65 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{csc}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 6}{Arthur Gao}{}{}{}
+
+\subsection{Example Proofs}
+Example:\\
+Prove that every integer $x$ that divides $x + 5$ also divides $5$. Formalized that is:
+$$
+\forall x \in \Z, (x | x + 5) \implies (x | 5)
+$$
+Remember that $a|b : \exists k \in \Z, b = ka$. That means that the initial definition expanded is:
+$$
+\forall x \in \Z, (\exists k \in \Z, x + 5 = kx) \implies (\exists k \in \Z, 5 = kx)
+$$
+\hspace*{5mm}\textit{Note that the first $k$ is not the same as the second $k$ in the above equation}
+\\
+\\
+This means we have a universal that contains an implication, which in turn means we follow the structure of universal proofs shown below:
+\begin{proof}
+	Let $x \in \Z$\\
+	\hspace*{17mm}Assume $(\exists k \in \Z, x + 5 = kx)$\\
+	\hspace*{17mm}\dots\\
+	\hspace*{17mm}Therefore $(\exists k \in \Z, 5 = kx)$
+\end{proof}\\
+\\
+For the proof, we will try examples in the universal as rough work to work out the universal proof:
+\begin{proof}
+	Let $x \in \Z$\\
+	\hspace*{17mm}Assume $(\exists k_1 \in \Z, x + 5 = k_1x)$\\
+	\hspace*{17mm}Let $ = k_1 - 1$\\
+	\hspace*{17mm}W.T.S. $k_2 \in \Z \equiv 5 = k_2x$\\
+	\hspace*{17mm}Then, $k_2 \in \Z$ since $k_1 \in \Z$\\
+	\hspace*{17mm}Also,\\
+	\begin{align*}
+		k_2x &= (k_1 - 1)x\\
+		&= k_1x - x\\
+		&= x + 5 - x\\
+		&= 5
+	\end{align*}
+\end{proof}
+\\
+Exercise:\\
+Prove that $\forall d, x \in \Z, x | x + d \impliesls x | d$
+\end {document}

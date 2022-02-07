@@ -1,0 +1,110 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{csc}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 4}{Arthur Gao}{}{}{}
+
+\section{Predicates}
+
+\subsection{Some Rules about Predicates}
+Let $S$ be the set of non-empty strings over alphabet {a, b, c} \\
+\hspace*{10mm} Define binary predicate $P$ with domain $S \times S$ by $P(x, y)$: \\
+\hspace*{10mm}"x and y have the same first character"\\
+Another option for this definition without announcing the domain in advance:\\
+\hspace*{10mm} Define $P(x, y)$ by/as: "x and y have the same first character", where $x, y \in S$
+\\
+\\
+Both of the above statements are valid. You should not, however, put quantification in the meaning of predicate. eg.
+\\
+\hspace*{10mm}$x, y \in S$ for each  $P(x, y): \dots$
+\\
+$P(x, y):$ "x and y have \dots where $x, y \in S$ is also invalid as is assumes x, and y are in S.
+
+\subsection{Example}
+$$
+\forall x \in X, \forall y \in S, P(x, y)
+$$
+This could be translated to:\\
+\hspace*{10mm} "For each x in S and for each y in S, x and y have the same first character.\\
+However, To simplify it and make it more natural english:\\
+\hspace*{10mm} "For all pair of string over S have the same first character"
+\\
+\subsection{Grouping Quantifiers}
+Note that variables with the same quantifier can be grouped together so:
+$$
+\forall x \in S, \forall y \in S, P(x, y) \equiv \forall x, y \in S, P(x, y)
+$$
+\\
+\subsection{Example}
+Say we wanted to say that there are a pair on non-equal strings to start with the same character, we can combine propositions with and:
+$$
+\exists x, y \in S, x \neq y \land P(x, y)
+$$
+Which is true: eg. $x = aaa, y = baab"$
+\\
+\subsection{Example}
+Say we wanted to say \textit{if} a pair of strings are different, they start with the same first letter
+$$
+\exists x, y \in S, x \neq y \implies P(x, y)
+$$
+\\
+\subsection{Example}
+Given the statement:\\
+\hspace*{10mm} In each pair of distinct strings, the strings start with the same character
+$$
+\forall x, y \in S, x \neq y \implies P(x, y)
+$$
+This statement is \textbf{FALSE}\\
+\hspace*{10mm} Consider counter-example x = aaa, y = baa\\
+\\
+Note that to say that a statement is false is the same as saying that the negation is true so:
+\begin{align*}
+	\lnot \big(\forall x, y \in S, x \neq y \implies &P(x, y)\big)\\
+	&\equiv\\
+	\exists x, y \in S, x \neq y \land \lnot &P(x, y)
+\end{align*}
+Where in the negation, the counter-example of the original statement is an example for the negation.
+
+\subsection{Examining Commas}
+Consider the question:
+$$
+\forall x, y \in S, x \neq y, P(x, y)
+$$
+what does the comma mean?\\
+Some possibilities are:
+\begin{itemize}
+	\item and
+	\item implication
+	\item such that
+\end{itemize}
+The convention is that:
+\begin{itemize}
+	\item After universal, comma \textit{often} means implication ($\implies$)
+	\item After existential, comma \textit{often} means and ($\land$)
+\end{itemize}
+However, \textbf{DO NOT RELY ON COMMAS}. Just use precise language.
+\section{Examine Divisibility}
+\bbox{Definition:\\
+$d$ devides $n$ (also written as $d|m$)\\
+if $n = dk$ for some $k \in \Z$}
+Note that in definitions, "if" almost certainly means "iff"
+\end {document}
