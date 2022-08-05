@@ -21,7 +21,112 @@
 
 \begin{document}
 
-\setheader{CSC165}{Lecture 6}{Arthur Gao}{}{}{}
+\setheader{CSC165}{Lecture 9}{Arthur Gao}{}{}{}
+First in person lecture Yay!!!
 
 
+\section{Continuation on Proof Techniques}
+Some proof techniques:
+\begin{itemize}
+    \item \strong{Direct Proof:} let follow structure
+    \begin{itemize}
+        \item Know something $\forall, \exists, \land, \lor, \implies, \leftrightarrow$
+    \end{itemize}
+    \item \strong{Indirect Proof:} when the proofs rely on equivalences
+    \begin{itemize}
+        \item $P \implies Q \equiv \lnot Q \implies \lnot P$
+        \item $P \land R \implies Q \equiv Q \implies P \land R$
+        \item $P \implies (Q \implies R) \equiv (P \land Q) \implies R$
+        
+        Examining $P \implies (Q \implies R)$, we look at the proof structure:
+        \begin{proof}
+            Assume P
+            (WTS $Q \implies R$)\\
+            Assume Q \dots \\
+            Therefore: R
+        \end{proof}
+        \\
+        \\
+        Examining proof structure of $(P \land Q) \implies R$:
+
+        \begin{proof}
+            Assume P and Assume Q\\
+            (WTS R)\\
+            Therefore: R
+        \end{proof}
+
+        We can note that similar proofs can be an indication of equivalences
+    \end{itemize}
+\end{itemize}
+
+\subsection{Proof by Contradiction}
+Proof by contradiction relies on:
+$$
+P \equiv \lnot P \implies \False
+$$
+We therefore can note that:
+\begin{align*}
+    P \implies Q &\equiv P \implies (\lnot Q \implies \False)\\
+    &\equiv (P \land \lnot Q) \implies \False
+\end{align*}
+Esamining the proof structures of  :\\
+\begin{proof}
+    Assume P\\
+    Therefore: Q
+\end{proof}
+
+Esamining the proof structures of  :\\
+
+\strong{Example:} prove $\forall n, d k \in \Z^+, n = kd \implies k \le n \land d \le n$
+\begin{proof}
+    Let $n, d, k \in \Z^+$,\\
+    Assume $n = kd$\\
+    Assume for contradiction that\footnote{This is used when doing proof by contradiction to show proof method used} 
+    $k > n \lor d > n$
+
+    \strong{Case $k > n$}\\
+    Since:
+    \begin{align*}
+        k &\ge 1 &(\because d \in \Z^+)\\
+        dk &\ge k\\
+        n &\ge k > n\\
+        n &> n &\text{A contradiction}
+    \end{align*}
+
+    \strong{Case $d > n$}\\
+    \emph{Similar as d and k are interchangeable}
+\end{proof}
+
+\emph{Note that it is quite easy to find \strong{MANY} contradiction however it is
+very easy to find a \strong{false contradiction}}
+
+\strong{Example: } Prove $P \implies Q \equiv \lnot Q \implies \lnot Q \equiv P \implies (\lnot Q \implies \False) \equiv (P \land \lnot Q) \implies \False$
+
+Examining the proof structure of $\lnot Q \implies \lnot P$
+\begin{proof}
+    Assume $\lnot Q$\\
+    Therefore $\lnot P$
+\end{proof}
+\\
+\\
+Examining the proof structure of $(P \land \lnot Q) \implies \False$
+\begin{proof}
+    Assume $P$\\
+    Assume $\lnot Q$\\
+    Therefore: \False
+\end{proof}
+
+We not that a proof of the contrapositive can be transformed easily to produce the proof
+of the contradiction.
+
+We observe this behavior as above when the first proof is the contrapositive which
+states that $\lnot P$ is implied while in the second proof we have \emph{assumed} $P$ 
+
+\subsection{Induction Proofs}
+Express: "There are infinitely many primes"
+
+We know that $Prime(3) \land \exists m \in \N, m > 3 \land Prime(m)$\\
+\hspace*{10mm} eg. $Prime(11)$
+
+We also know that $$\forall n \in \N, Prime(n) \implies \exists m \in \N, m > n \land Prime(m) \land \exists n \in \N, Prime(n) $$
 \end {document}

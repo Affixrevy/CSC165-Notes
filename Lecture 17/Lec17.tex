@@ -1,0 +1,83 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{csc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 17}{Arthur Gao}{}{}{}
+
+\section{Worst-Case, Best-Case, Average-Case, Runtime}
+
+Recall: for algoritm A with domain of input $I$, we choose a natural number size (measure for input)
+
+Then for $n \in \N$ let $\mathcal{I}_n = \{z in \mathcal{I}: z\text{ has size n}\}$
+
+and $WC_A(n) = max \{RT_A(z), z \in \mathcal{I}_n\}$
+
+and $BC_A(n) = min \{RT_A(z), z \in \mathcal{I}_n\}$
+
+So the upper bound and lower bounds can be obtained by:
+\begin{align*}
+    WC \in \bigO(f) \text{ iff } \exists c, n_0, \in \R^{\ge 0}, \forall n \in \N, n \ge n_0 &\implies \forall z \in \mathcal{I}_n, RT(z) \le c f(n)\\
+    WC \in \Omega(f) \text{ iff } \exists c, n_0, \in \R^{\ge 0}, \forall n \in \N, n \ge n_0 &\implies \exists z \in \mathcal{I}_n, RT(z) \ge c f(n)\\
+    BC \in \bigO(f) \text{ iff } \exists c, n_0, \in \R^{\ge 0}, \forall n \in \N, n \ge n_0 &\implies \exists z \in \mathcal{I}_n, RT(z) \le c f(n)\\
+    BC \in \Omega(f) \text{ iff } \exists c, n_0, \in \R^{\ge 0}, \forall n \in \N, n \ge n_0 &\implies \forall z \in \mathcal{I}_n, RT(z) \ge c f(n)
+\end{align*}
+Given the code 
+\begin{lstlisting}[language=Python]
+def is_in(x: int l: List) -> bool:
+    for item in l:
+        if x == item:
+            return True
+    return False
+\end{lstlisting}
+
+Notice that for all conditions, the number of iterations is less than or equal to $n$
+
+\end {document}

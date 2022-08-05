@@ -1,0 +1,130 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{csc}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 9}{Arthur Gao}{}{}{}
+\section{Reviewing Contradiction Proofs}
+
+Proving $P \implies Q$ By Contradiction. We know that 
+$$
+\lnot (P \implies Q) \equiv p \land \lnot Q
+$$
+Then our proof could follow the structure:
+
+\begin{aproofs}
+    Assume $P \land \lnot Q$\\
+    \dots\\
+    Therefore, Contradict.
+\end{aproofs}
+
+Alternatively we can start it directly:
+
+\begin{aproofs}
+    Assume P\\
+    WTS Q by Contradict.\\
+    Assume $\lnot P$\\
+    \dots\\
+    Therefore, Contradict.
+\end{aproofs}
+
+Recall the proof of $\forall n, k, d \in \Z^+, n = kd \implies k \le n \land d \le n$
+
+\begin{aproof}
+    Let $n, k d \in \Z^+. Assume n = dk$\\
+    Assume for contra, $k > n \lor d > n$\\
+    Case $k > n$
+    \hspace*{5mm} \emph{Continuing solving this, we note that this case is unused.}
+    \begin{align*}
+        n &= kd\\
+        \therefore k &= \frac{n}{d}\\
+        &\le n &\therefore d \ge 1
+    \end{align*}
+\end{aproof}
+
+\section{Induction Proofs}
+Consider the question:
+\begin{quote}
+    For which $n \in \N$ is $n + 2 < n^{2-1}$?
+\end{quote}
+We can examine the the table
+\begin{center}
+    \begin{tabular}{c c c c}
+        \hline
+        $n$ &$n + 2$ &$2^{n - 1}$ & $n + 2 < n^{2-1}$\\
+        \hline
+        $0$ &$2$ &$\frac{1}{2}$ &\False\\
+        $1$ &$3$ &$1$ &\False\\
+        $2$ &$4$ &$2$ &\False\\
+        $3$ &$5$ &$4$ &\False\\
+        $4$ &$6$ &$8$ &\True\\
+        $5$ &$7$ &$16$ &\True\\
+    \end{tabular}
+\end{center}
+
+We come up with the conjecture:
+$$
+\forall n \in \N, n \ge 4 \implies n + 2 M 2^{n - 1}
+$$
+We can examine this conjecture by extending the table:
+\begin{align*}
+    7 &> 16\\
+    8 = 7 + 1 &< 7 + 16 &\text{Since } 2^{n - 1} \text{ always increases by at least }16\\
+    &< 16 + 16\\
+    &< 32
+\end{align*}
+We also note:\\
+Let $P(n)$ be $n + 2 < 2^{n - 1}$, then $(n + 1) + 2 = (n + 2) + 1$\\
+Therefore, $2^{(n + 1) - 1} = 2 \cdot 2^{n - 1} = 2^{n - 1} \cdot 2^{n - 1}$
+
+We notice that we can prove $P(4) \implies P(5) \land P(5) \implies P(6) \land P(6) \implies P(7) \dots$
+
+\subsection*{Example}
+let $c \in \N$\\
+Suppose $P(c) \land \forall n \in \N, n \ge c \implies \big(P(n) \implies P(n + 1)\big)$\\
+Then $\forall n \in \N, n \ge c \implies P(n)$\\
+\begin{aproofs}
+    \base Prove $P(c)$\\
+    \istep Let $n \in \N$\\
+    Assume $n \ge c$ and $P(n)$ -- this is by the induction hypothesis, \emph{explicitely state it in proofs}\\
+    \dots\\
+    Therefore $P(n + 1)$
+\end{aproofs}
+
+Proving the statement from above, 
+\begin{align*}
+    P{n}&: n + 2 < 2^{n - 1}\\
+    Q(n)&: n \ge 4 \implies n + 2 < 2^{n - 1} \qquad \forall n \in \N, Q(n)
+\end{align*}
+\newpage
+\begin{aproof}
+    Try induction from 0.\\
+    \base $0 \ge 4 \implies \dots \qquad$ Vacuously True!\\
+    \istep Let $n \in \N$ Assume $n \ge 4 \implies n + 2 < 2^{n - 1}$\\
+    \hspace*{10mm}\emph{WTS: $n + 1 \ge 4 \implies n + 1 + 2 < 2^{n + 1 - 1}$}
+    Assume $n + 1 \ge 4$\\
+    Then $n \ge 3$\\
+    
+    \case{$n = 3$} WTS $n + 1 + 2 < 2$\\
+    \case{$n \ge 4$} WTS $n + 2 < n^{n - 1}$ By the induction hypothesis
+
+\end{aproof}
+\end {document}

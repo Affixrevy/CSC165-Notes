@@ -1,0 +1,125 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{csc}
+
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\setheader{CSC165}{Lecture 12}{Arthur Gao}{}{}{}
+\section{Algorithm Analysis}
+Algorithm analysis has two components:
+\begin{enumerate}
+    \item Correctness:
+    \begin{itemize}
+        \item why does my program work?
+        \item Does it produce the corre t results for valid inputs
+        \item \emph{left to CSC236}
+    \end{itemize}
+    \item Complexity - aka "efficiency" 
+    \begin{itemize}
+    
+        \item How much resources does a program use
+        \begin{itemize}
+            \item time
+            \item space (memory)
+            \item bandwidth (communication)
+        \end{itemize}
+        \item It is not cow concise / elegant the code itself is. 
+    \end{itemize}
+\end{enumerate}
+Reviewing past ideas (csc108)
+
+Say we have program:
+
+We measures resources relative to a size measure of the input
+\begin{itemize}
+    \item If the input is a string, we might use the length
+    \item If the input is a natural number, we might us it or maybe $log_2$ of it.
+\end{itemize}
+We'll assume the size is a natural number and what we measure is a non-negative number 
+therefore the measure is some function: $\N \to \R^{\ge 0}$
+
+Define:\\
+    For $f, g: \N \to \R^{\ge 0}$, $f$ absolutely dominates $g$ if:
+    $$
+        \forall n \in \N, g(n) \le f(n)
+    $$
+
+Given that, we can define $h, j: N \to \R^{\ge 0} $ by $h(n) = 2n + 3, j(n) = \frac{n}{2} + 5$
+Examining this, we note that if we say $100h$
+\begin{align*}
+    j(n) &= \frac{n}{2} + 5\\
+    &\le 200n + 5\\
+    &\le 200n + 300\\
+    &= 100h(n)
+\end{align*}
+therefore, $n \ge 0$
+
+Formalizing this, we can say that:
+
+Define:\\
+h dominates j up to a control factor if:
+$$
+\exists c \in \R^+, \forall n \in \N, j(n) \le ch(n)
+$$
+\begin{aproof}
+    Let $c = 4 \in \R^+$. Let $n \in \N$\\
+    Then,
+    \begin{align*}
+        h(n) &= 2n + 3\\
+        &\le 2n + 20\\
+        &= c(\frac{n}{2} + 5)\\
+        &= cj(n)
+    \end{align*}
+\end{aproof}
+
+Example:
+\begin{itemize}
+    \item Define $k: \N \to \R^{\ge 0}$ by $k(n) = n^2$
+    \item Define $h: \N \to \R^{\ge 0}$ by $h(n) = 2n + 3$
+\end{itemize}
+We note that it is impossible to make it so that either $h$ dominates $k$ or $k$
+dominates $g$ even up to a control factor, therefore we have a third situation:
+
+Define:\\
+For $f, g: \N \to \R^{\ge 0}$, $f$ eventually dominates $g$ up to a control factor if:
+    $$
+        \exists c, n_0 \in \R^+, \forall n \in \N, n \ge n_0 \to g(n) \le cf(n)
+    $$
+This is also written as $g \in \bigO(f)$
+
+Formally proving the given example that $h \in \bigO(k)$ would yield:
+\begin{aproof}
+    Let $c = 5 \N R^+$\\
+    Let $n_0 = 1 \in \R^+$\\
+    \begin{align*}
+        h(n) &= 2n+3\\
+        &\le 2n + 3n &\text{since }n \ge 1\\
+        &= 5n\\ 
+        &\le 5n^2 \\
+        &= cn^2 &\text{since }n \ge 1\\
+        &= ck(n) &\text{since }c = 5
+    \end{align*}
+\end{aproof}
+
+We can also say that theo opposite is of the above statement is :
+$$k \not\in \bigO(h) \! : \! \forall c, n_0 \in \R^+, \exists n \in \N, n \ge n_0 \land k(n) > ch(n)$$
+
+\end {document}
